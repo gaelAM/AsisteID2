@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario Interactivo</title>
+    <link rel="stylesheet" href="cronograma.css">
+    <style>
+        .has-note {
+            background-color: #ffeb3b;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .note-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+
+        .day {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .header {
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <button id="menuBtn">&#9776;</button>
+    <div id="sidebar">
+        <button id="closeBtn">&times;</button>
+        <a href="index.html">Inicio</a>
+        <a href="escanear.html">Escanear CURPs</a>
+        <a href="curps.html">Consulta de CURPs</a>
+        <a href="localidades.html">Localidades cercanas</a>
+        <a href="cronograma.html">Calendario de Entregas</a>
+    </div>
+
+    <div id="main-content">
+        <h1>Calendario de Entregas</h1>
+    </div>
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <select id="monthSelect">
+                <option value="0">Enero</option>
+                <option value="1">Febrero</option>
+                <option value="2">Marzo</option>
+                <option value="3">Abril</option>
+                <option value="4">Mayo</option>
+                <option value="5">Junio</option>
+                <option value="6">Julio</option>
+                <option value="7">Agosto</option>
+                <option value="8">Septiembre</option>
+                <option value="9">Octubre</option>
+                <option value="10">Noviembre</option>
+                <option value="11">Diciembre</option>
+            </select>
+            <select id="yearSelect"></select>
+        </div>
+        <div class="calendar-grid">
+            <!-- Días del calendario se generan dinámicamente -->
+        </div>
+    </div>
+
+    <!-- Modal para añadir notas -->
+    <div class="note-modal" id="noteModal">
+        <h3>Añadir Nota</h3>
+        <textarea id="noteText" placeholder="Escribe tu nota aquí..."></textarea>
+        <button id="saveNote">Guardar Nota</button>
+        <button id="closeModal">Cerrar</button>
+    </div>
+    <div class="message" id="message"></div>
+
+    <script>
+        const daysContainer = document.querySelector('.calendar-grid');
+        const monthSelect = document.getElementById('monthSelect');
+        const yearSelect = document.getElementById('yearSelect');
+        const modal = document.getElementById('noteModal');
+        const noteText = document.getElementById('noteText');
+        const saveNote = document.getElementById('saveNote');
+        const closeModal = document.getElementById('closeModal');
+        const message = document.getElementById('message');
+        let notes = JSON.parse(localStorage.getItem('notes')) || {};
+        let selectedDate = null;
+    
+        // Obtener el mes y año actual
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth(); // Mes actual (0-11)
+        const currentYear = currentDate.getFullYear(); // Año actual
+    
+        // Inicializar el selector de mes y año con el mes y año actuales
+        monthSelect.value = currentMonth;
+        yearSelect.value = currentYear;
+    
+        // Rellenar el selector de años
+        for (let i = currentYear - 10; i <= currentYear + 10; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = i;
+            yearSelect.appendChild(option);
+        }
+        yearSelect.value = currentYear;
+    
+        // Generar encabezados de días de la semana
+        function addWeekHeaders() {
+            const daysOfWeek = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+            daysOfWeek.forEach(day => {
+                const header = document.createElement('div');
+                header.textContent = day;
+                header.classList.add('header');
+                daysContainer.appendChild(header);
+            });
+        }
+    
+        // Generar el calendario
+        function generateCalendar(month, year) {
+            daysContainer.innerHTML = '';
+            addWeekHeaders(); // Agregar encabezados
+            const firstDay = new Date(year, month).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+    
+            // Espacios vacíos antes del primer día del mes
+            for (let i = 0; i < firstDay; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.classList.add('day', 'empty');
+                daysContainer.appendChild(emptyCell);
+            }
+    
+            // Días del mes
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateKey = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+                const dayElement = document.createElement('div');
+                dayElement.classList.add('day');
+                if (notes[dateKey]) {
+                    dayElement.classList.add('has-note');
+                }
+                dayElement.textContent = day;
+                dayElement.dataset.date = dateKey;
+    
+                // Evento para abrir el modal
+                dayElement.addEventListener('click', () => {
+                    selectedDate = dateKey;
+                    noteText.value = notes[selectedDate] || '';
+                    modal.classList.add('active');
+                });
+    
+                daysContainer.appendChild(dayElement);
+            }
+        }
+    
+        // Cambiar mes/año
+        monthSelect.addEventListener('change', () => {
+            generateCalendar(parseInt(monthSelect.value), parseInt(yearSelect.value));
+        });
+        yearSelect.addEventListener('change', () => {
+            generateCalendar(parseInt(monthSelect.value), parseInt(yearSelect.value));
+        });
+    
+        // Guardar nota y actualizar día directamente
+        saveNote.addEventListener('click', () => {
+            if (selectedDate) {
+                notes[selectedDate] = noteText.value;
+                localStorage.setItem('notes', JSON.stringify(notes));
+    
+                const dayElement = document.querySelector(`.day[data-date="${selectedDate}"]`);
+                if (notes[selectedDate]) {
+                    dayElement.classList.add('has-note');
+                } else {
+                    dayElement.classList.remove('has-note');
+                }
+    
+                modal.classList.remove('active');
+                showMessage(`Nota guardada para la fecha ${selectedDate}`);
+            }
+        });
+    
+        // Cerrar modal
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+    
+        // Mostrar mensaje temporal con la fecha actual
+        function showMessage(msg) {
+            const currentDate = new Date();
+            const formattedDate = `${currentDate.getDate().toString().padStart(2, '0')}/${(currentDate.getMonth() + 1).toString().padStart(2, '0')}/${currentDate.getFullYear()}`;
+            message.textContent = `${msg}`;
+            setTimeout(() => {
+                message.textContent = '';
+            }, 3000);
+        }
+    
+        // Inicializar calendario con el mes y año actuales
+        generateCalendar(currentMonth, currentYear);
+    </script>
+    
+    
+
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const closeBtn = document.getElementById('closeBtn');
+        const sidebar = document.getElementById('sidebar');
+
+        menuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+/* Estilo para la barra de búsqueda */
+.buscador {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+
+
+.buscador input {
+    width: 80%;
+    max-width: 400px;
+    padding: 10px 15px;
+    border: 2px solid #E6007E;
+    border-radius: 25px;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.buscador input:focus {
+    border-color: #ff7dc4;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    outline: none;
+}
+
+/* Estilo para el menú de acciones */
+.action-menu {
+    position: fixed;
+    bottom: 50px; /* Separación de la parte inferior */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 250px;
+    display: none;
+    background-color: #fff;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    padding: 15px;
+    text-align: center;
+    border-radius: 15px; /* Bordes redondeados */
+    z-index: 1000;
+    justify-content: center; /* Centrar los botones */
+}
+
+.action-menu label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+.action-menu input[type="checkbox"] {
+    appearance: none;
+    width: 40px; /* Tamaño de la imagen aumentado */
+    height: 40px; /* Tamaño de la imagen aumentado */
+    background: url('images/seleccionar\ icon.png') no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.action-menu button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+    padding: 10px 25px;
+    color: rgb(0, 0, 0);
+    background: none;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.action-menu button img {
+    margin-bottom: 5px;
+    width: 40px; /* Tamaño de la imagen */
+    height: 40px; /* Tamaño de la imagen */
+}
+
+.bote-basura{
+    margin-top: 1px;
+}
+
+.close-menu-btn {
+    position: absolute; /* Posiciona el botón relativo al contenedor */
+    top: -15px; /* Separación desde la parte superior del menú */
+    right: -30px; /* Separación desde la parte derecha del menú */
+    cursor: pointer;
+    z-index: 1001; /* Asegura que quede por encima de otros elementos */
+}
+
+.cerrar {
+    width: 20px !important; /* Ajusta el ancho deseado */
+    background:none;
+    padding: 1px 10px;
+    object-fit: contain; /* Asegura que la imagen se escale correctamente */
+}
+table td:first-child, table th:first-child {
+    text-align: center;
+    font-weight: bold;
+}
+/* Estilo para el contenedor de los selects */
+
+
+.buscador select {
+    display: block;
+    width: 80%; /* Ajusta el ancho según sea necesario */
+    max-width: 430px;
+    margin: 10px auto;
+    padding: 10px;
+    border: 2px solid #E6007E;
+    border-radius: 25px;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    appearance: none;
+    text-align: center;
+}
+
+
+/* Icono de flecha personalizado para los selects */
+.buscador select::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    border: solid #E6007E;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 5px;
+    transform: rotate(45deg);
+    pointer-events: none; /* Evita que interfiera con el clic */
+}
+
+/* Efecto al pasar el mouse sobre el select */
+.buscador select:hover {
+    border-color: #ff7dc4;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Efecto al enfocar el select */
+.buscador select:focus {
+    outline: none;
+    border-color: #ff7dc4;
+}
+
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    .buscador select {
+        width: 90%; /* Aumenta el ancho para pantallas más pequeñas */
+        font-size: 12px; /* Reduce ligeramente el tamaño de la fuente */
+    }
+}
+/* Estilos generales para los botones */
+#filtrarBtn, #exportBtn {
+    padding: 10px 20px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de la fuente */
+    font-weight: bold; /* Texto destacado */
+    color: #ffffff; /* Texto blanco */
+    background-color: #E6007E; /* Color principal */
+    border: none; /* Sin bordes */
+    border-radius: 8px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor tipo "mano" */
+    transition: all 0.3s ease; /* Transición suave */
+    margin-top: 5px; /* Espaciado entre botones */
+    margin-bottom: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+/* Efecto hover */
+#filtrarBtn:hover, #exportBtn:hover {
+    background-color: #ff7dc4; /* Color más claro al pasar el ratón */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Sombra más prominente */
+}
+
+/* Efecto activo */
+#filtrarBtn:active, #exportBtn:active {
+    background-color: #cc005f; /* Color más oscuro al presionar */
+    transform: translateY(2px); /* Simulación de presión */
+}
+
+/* Para pantallas pequeñas */
+@media (max-width: 768px) {
+    #filtrarBtn, #exportBtn {
+        font-size: 14px; /* Fuente más pequeña */
+        padding: 8px 16px; /* Reducir espaciado */
+        width: 100%; /* Ocupan todo el ancho */
+    }
+}

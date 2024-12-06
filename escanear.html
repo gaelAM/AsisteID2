@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escanear CURPs</title>
+    <link rel="icon" href="images/icono.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.min.js"></script>
+    <link rel="stylesheet" href="css/camara.css">
+</head>
+
+<body>
+    <button id="menuBtn">&#9776;</button>
+    <div id="sidebar">
+        <button id="closeBtn">&times;</button>
+        <a href="index.html">Inicio</a>
+        <a href="escanear.html">Escanear CURPs</a>
+        <a href="curps.html">Consulta de CURPs</a>
+        <a href="localidades.html">Localidades cercanas</a>
+        <a href="cronograma.html">Calendario de Entregas</a>
+    </div>
+
+    <div id="main-content">
+
+    <h1>Escanear CURPs</h1>
+</div>
+    <div class="botones">
+                    <!-- Selección de localidad -->
+                    <label for="localidad" class="localidad">Localidad:</label>
+                    <select id="localidad">
+                        <option value="Ninguno" selected>Ninguno</option>
+                        <option value="Ranchoapan">Ranchoapan</option>
+                        <option value="Mixtán">Mixtan</option>
+                        <option value="San Soles">San Soles</option>
+                        <option value="Lomas de Tacamichapan">Lomas de Tacamichapan</option>
+                        <option value="Galeras">Galeras</option>
+                        <option value="La Lajilla">La Lajilla</option>
+                        <option value="Ixpuchapan">Ixpuchapan</option>
+                        <option value="Yancuigapan">Yancuigapan</option>
+                        <option value="Buena Vista">Buena Vista</option>
+                        <option value="Malota">Malota</option>
+                    </select>
+            
+                    <!-- Selección de Dirección de Atención -->
+                    <label for="direccionAtencion" class="direccion">Dirección de Atención a Población Vulnerable:</label>
+                    <select id="direccionAtencion">
+                        <option value="Ninguno" selected>Ninguno</option>
+                        <option value="Alimentación Escolar Modalidad Caliente y Fría">Alimentacion Escolar Modalidad Caliente y Fria</option>
+                        <option value="Atención Alimentaria a Grupos Prioritarios">Atencion Alimentaria a Grupos Prioritarios</option>
+                        <option value="Atención Alimentaria a Personas en Situación de Emergencia o Desastre">Atencion Alimentaria a Personas en Situacion de Emergencia o Desastre</option>
+                        <option value="Atención Alimentaria en los Primeros 1000 Días">Atencion Alimentaria en los Primeros 1000 Dias</option>
+                        <option value="Desarrollo a la Vivienda y la Comunidad">Desarrollo a la Vivienda y la Comunidad</option>
+                        <option value="Programa de Asistencia a la Población en Condición de Emergencia (APCE)">Programa de Asistencia a la Poblacion en Condicion de Emergencia (APCE)</option>
+                        <option value="Programa de Salud y Bienestar Comunitario (PSBC)">Programa de Salud y Bienestar Comunitario (PSBC)</option>
+                        <option value="Proyectos Productivos">Proyectos Productivos</option>
+                    </select>
+        <button onclick="startCamera()" class="scan-button">Escanear con Cámara</button>
+        <label for="qrInput" class="label-file">Elegir archivo</label>
+        <input type="file" id="qrInput" accept="image/*" style="display: none;">
+    </div>
+
+    <div id="cameraContainer" style="display: none;">
+        <video id="camera" width="600" height="400"></video>
+        <button id="closeCamera" onclick="stopCamera()">Cerrar</button>
+    </div>
+    <div id="main-content2">
+        <h2>Datos Escaneados</h2>
+        <div id="scannedDataContainer" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Clave</th>
+                        <th>CURP´s Asociadas</th>
+                        <th>Apellido Paterno</th>
+                        <th>Apellido Materno</th>
+                        <th>Nombres</th>
+                        <th>Sexo</th>
+                        <th>Fecha de Nacimiento</th>
+                        <th>Entidad</th>
+                        <th>Homoclave</th>
+                        <th>Localidad</th>
+                        <th>Dirección de Atención a Población Vulnerable</th>
+                    </tr>
+                </thead>
+                
+                <tbody id="scannedDataTable"></tbody>
+            </table>
+            <div>
+                <button id="saveCurpButton">Guardar</button>
+                <button id="discardCurpButton">Descartar</button>
+            </div>
+            <div id="message" style="display: none; margin-top: 10px; color: green;">
+                ¡La CURP se guardó con éxito!
+            </div>
+        </div>
+    </div>
+
+    <script src="scanner.js"></script>
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const closeBtn = document.getElementById('closeBtn');
+        const sidebar = document.getElementById('sidebar');
+
+        menuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+        });
+
+    </script>
+</body>
+
+</html>

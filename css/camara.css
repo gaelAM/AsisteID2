@@ -1,0 +1,577 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+#video {
+    display: none;
+    width: 320px;
+    height: 240px;
+}
+
+#status {
+    margin-top: 20px;
+    color: green;
+}
+
+.hidden {
+    display: none;
+}
+
+h1 {
+    color: #333;
+}
+
+#video {
+    display: none;
+    width: 320px;
+    height: 240px;
+}
+
+#status {
+    margin-top: 20px;
+    color: green;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Estilos de fondo */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    background-color: #E6007E;
+    /* Rosa mexicano */
+    color: #000000;
+    margin: 0;
+    height: 100%;
+}
+
+h1,
+h2,
+p {
+    color: #000000;
+}
+
+/* Estilos para el menú lateral */
+#sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    background-color: #fff;
+    color: #E6007E;
+    /* Rosa mexicano para los textos */
+    padding-top: 20px;
+    transition: 0.3s;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    /* Asegura que el menú esté sobre el contenido */
+    /* Asegura que el menú esté sobre el contenido */
+}
+
+#sidebar a {
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #E6007E;
+    display: block;
+    transition: 0.3s;
+}
+
+#sidebar a:hover {
+    background-color: #FFC0CB;
+    /* Rosa claro */
+}
+
+/* Asegura que el contenido principal esté debajo del menú */
+#main-content {
+    padding: 30px;
+    transition: margin-left 0.3s;
+    margin-left: 0;
+    background-color: #fff;
+    /* Fondo blanco para el contenido principal */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 500;
+    /* Valor menor que el z-index del menú */
+}
+
+#main-content2 {
+    padding: 30px;
+    transition: margin-left 0.3s;
+    margin-left: 0;
+    margin-top: 20px;
+    background-color: #fff;
+    /* Fondo blanco para el contenido principal */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 500;
+    /* Valor menor que el z-index del menú */
+}
+
+/* Botón de menú redondo */
+#menuBtn,
+#closeBtn {
+    font-size: 30px;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #ffffff00;
+    /* Fondo blanco */
+    color: #E6007E;
+    /* Texto en rosa mexicano */
+    border: none;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+}
+
+#saveCurpButton{
+    margin-top: 25px;
+    font-size: 16px;
+    margin-right: 30px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #E6007E;
+    /* Fondo blanco */
+    color: #ffffff;
+    /* Texto en rosa mexicano */
+    border: none;
+    border-radius: 10px;
+}
+
+#discardCurpButton{
+    margin-top: 25px;
+    font-size: 16px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #E6007E;
+    /* Fondo blanco */
+    color: #ffffff;
+    /* Texto en rosa mexicano */
+    border: none;
+    border-radius: 10px;
+}
+
+#menuBtn {
+    left: 20px;
+}
+
+#closeBtn {
+    right: 20px;
+}
+
+#sidebar.open {
+    left: 0;
+}
+
+#main-content.open {
+    margin-left: 250px;
+}
+
+/* Botón con puntas redondeadas */
+#startCamera {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #FFC0CB;
+    /* Rosa mexicano */
+    color: rgb(31, 30, 30);
+    border: none;
+    border-radius: 20px;
+    /* Puntas redondeadas */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Contenedor de botones */
+.botones {
+    display: flex;
+    justify-content: center;
+    /* Centra los botones horizontalmente */
+    align-items: center;
+    /* Centra los botones verticalmente */
+    flex-direction: column;
+    gap: 15px;
+    /* Espacio entre los botones */
+    flex-wrap: wrap;
+    /* Permite que los botones se ajusten si el tamaño de la pantalla es pequeño */
+    margin-top: 20px;
+    /* Espacio superior */
+}
+
+
+
+/* Estilo para el botón de escanear con cámara */
+.scan-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ffffff;
+    /* Rosa palo */
+    color: #E6007E;
+    /* Texto en rosa fuerte */
+    border: 2px solid #ffffff;
+    /* Borde rosa palo */
+    border-radius: 25px;
+    /* Bordes redondeados */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+/* Estilo para el botón de eliminar seleccionados */
+.delete-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ffffff;
+    /* Rosa palo */
+    color: #E6007E;
+    /* Texto en rosa fuerte */
+    border: 2px solid #ffffff;
+    /* Borde rosa palo */
+    border-radius: 25px;
+    /* Bordes redondeados */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+/* Estilo para el hover de los botones */
+.scan-button:hover,
+.delete-btn:hover {
+    background-color: #E6007E;
+    /* Fondo rosa fuerte */
+    color: #fff;
+    /* Texto blanco */
+    border: 2px solid #E6007E;
+    /* Borde rosa fuerte */
+}
+
+/* Estilo para la etiqueta de elegir archivo */
+.label-file {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ffffff;
+    /* Rosa palo */
+    color: #E6007E;
+    /* Texto rosa fuerte */
+    border: 2px solid #ffffff;
+    /* Borde rosa palo */
+    border-radius: 25px;
+    /* Bordes redondeados */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
+}
+
+/* Estilo para el hover de la etiqueta */
+.label-file:hover {
+    background-color: #E6007E;
+    /* Fondo rosa fuerte */
+    color: #fff;
+    /* Texto blanco */
+    border: 2px solid #E6007E;
+    /* Borde rosa fuerte */
+}
+
+#startCamera:hover {
+    background-color: #e08f9d;
+    /* Rosa claro */
+}
+
+/* Estilos adicionales */
+#video {
+    display: none;
+    width: 320px;
+    height: 240px;
+}
+
+#status {
+    margin-top: 20px;
+    color: green;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Estilos para el contenedor del CURP */
+#curpContainer {
+    margin-top: 20px;
+}
+
+#saveCurp {
+
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #FFC0CB;
+    /* Rosa mexicano */
+    color: rgb(31, 30, 30);
+    ;
+    border: none;
+    border-radius: 20px;
+    /* Puntas redondeadas */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#saveCurp:hover {
+    background-color: #e08f9d;
+    /* Rosa claro */
+}
+
+
+
+/* Estilos para la tabla */
+.table-container {
+width: 100%;
+overflow-x: auto;
+margin: 20px 0;
+}
+
+table {
+width: 100%;
+border-collapse: collapse;
+background-color: white;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+margin: 0 auto;
+word-wrap: break-word;  /* Asegura que las palabras largas no se salgan de la celda */
+table-layout: fixed;  /* Hace que las celdas sean más flexibles */
+}
+
+th, td {
+padding: 12px 15px;
+text-align: center;
+border-bottom: 1px solid #ddd;
+word-wrap: break-word;
+}
+
+th {
+background-color: #f2f2f2;
+color: #800080; /* Morado DIF */
+text-align: center;
+}
+
+/* Media queries para dispositivos móviles */
+@media (max-width: 600px) {
+table, th, td {
+font-size: 14px;
+}
+
+th, td {
+padding: 8px 10px; /* Ajusta el padding para pantallas pequeñas */
+}
+
+/* Hace que la tabla sea desplazable horizontalmente en dispositivos móviles */
+.table-container {
+-webkit-overflow-scrolling: touch;
+overflow-x: auto;
+}
+
+/* Ajuste de la apariencia de la tabla para pantallas pequeñas */
+table {
+display: block;
+overflow-x: auto;
+white-space: nowrap;
+}
+
+th {
+font-size: 14px;
+}
+
+td {
+font-size: 14px;
+}
+}
+
+
+/* Ventana emergente de la cámara */
+#cameraContainer {
+display: none;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background-color: rgb(255, 255, 255);
+padding: 20px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+z-index: 1000;
+}
+
+#closeCamera {
+background-color: #E6007E;
+color: white;
+border: none;
+padding: 5px 10px;
+cursor: pointer;
+border-radius: 3px;
+margin-top: 10px;
+}
+/* Contenedor general para selects */
+.botones select {
+    width: 100%; /* Ocupará todo el ancho disponible */
+    max-width: 600px; /* Limita su tamaño máximo */
+    margin: 10px 0; /* Espaciado entre selects */
+    padding: 10px 15px;
+    border: 2px solid #ffffff;
+    border-radius: 10px; /* Bordes redondeados */
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    appearance: none; /* Elimina estilos por defecto del navegador */
+    text-align: center; /* Centra el texto */
+    transition: all 0.3s ease;
+    cursor: pointer; /* Cursor tipo "mano" */
+}
+
+/* Flecha personalizada */
+.botones select::-ms-expand {
+    display: none; /* Oculta la flecha en IE/Edge */
+}
+
+.botones select::after {
+    content: '';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #E6007E;
+    pointer-events: none;
+}
+
+/* Hover y foco */
+.botones select:hover {
+    border-color: #ff7dc4;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.botones select:focus {
+    outline: none;
+    border-color: #ff7dc4;
+}
+.localidad{
+    color: #ffffff;
+}
+.direccion{
+    color: #ffffff;
+}
+/* Para pantallas pequeñas */
+@media (max-width: 768px) {
+    .botones select {
+        width: 90%; /* Más ancho en móviles */
+        font-size: 14px; /* Tamaño de fuente reducido */
+    }
+}
+
+/* Adaptación para dispositivos móviles */
+@media (max-width: 600px) {
+body {
+    margin-top: 15px;
+padding: 10px;
+}
+
+h1 {
+font-size: 2em;
+}
+
+table, th, td {
+font-size: 14px;
+}
+
+.buttons-container {
+flex-direction: column;
+align-items: center;
+}
+
+#cameraContainer {
+width: 70%; /* Reduce el ancho de la ventana emergente */
+max-width: 100%; /* Asegura que no se salga horizontalmente */
+height: auto; /* Ajusta la altura automáticamente */
+max-height: 90vh; /* Limita la altura máxima a 90% de la ventana */
+padding: 10px; /* Reduce el padding */
+top: 50%; /* Ajusta la posición vertical */
+left: 50%; /* Ajusta la posición horizontal */
+transform: translate(-50%, -50%); /* Centra la ventana */
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+#camera {
+width: 80%; /* Asegura que la cámara se ajuste al contenedor */
+height: auto; /* Mantiene la proporción de la cámara */
+max-height: 80vh; /* Limita la altura máxima de la cámara */
+}
+
+#closeCamera {
+padding: 8px 12px; /* Ajusta el padding del botón de cerrar */
+font-size: 0.9em; /* Ajusta el tamaño de fuente */
+}
+
+#menuBtn {
+    top: 25px;
+    background: none;
+}
+
+#titulo {
+
+    top: 28px;
+    /* Ajusta la distancia desde la parte superior */
+    right: 26px;
+    /* Ajusta la distancia desde el borde derecho */
+    text-align: right;
+    /* Alinea el texto a la derecha */
+    margin: 0;
+    padding: 0;
+    z-index: 1000;
+    /* Asegura que el título esté encima de otros elementos */
+}
+
+#titulo h1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.9 rem;
+    /* Tamaño de letra ligeramente mayor */
+    font-weight: bold;
+    letter-spacing: 3px;
+    /* Espaciado entre letras */
+    text-transform: uppercase;
+    /* Hace el texto en mayúsculas */
+    margin: 0;
+    /* Elimina el margen por defecto */
+    color: #333;
+    /* Color gris oscuro */
+
+    /* Ajuste de posición */
+    top: 10px;
+    /* Sube la letra un poco */
+    animation: fadeIn 1.5s ease-in-out;
+    /* Animación de aparición */
+    right: 100px;
+    text-align: center;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+
+
+}
+}

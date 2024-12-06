@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de CURPs</title>
+    <link rel="icon" href="images/icono.png" type="image/png">
+    <link rel="stylesheet" href="css/camara.css">
+    <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.min.js"></script>
+    <link rel="stylesheet" href="buscador y menu.css">
+
+</head>
+<body>
+    <button id="menuBtn">&#9776;</button>
+    <div id="sidebar">
+        <button id="closeBtn">&times;</button>
+        <a href="index.html">Inicio</a>
+        <a href="escanear.html">Escanear CURPs</a>
+        <a href="curps.html">Consulta de CURPs</a>
+        <a href="localidades.html">Localidades cercanas</a>
+        <a href="cronograma.html">Calendario de Entregas</a>
+    </div>
+
+    <div id="main-content">
+        <div id="titulo">
+            <h1>Consulta de CURPs</h1>
+        </div>
+        <div class="buscador">
+            <input type="text" id="searchInput" placeholder="Buscar por nombres o apellidos">
+            <select id="localidadSelect">
+                <option value="">Localidad</option>
+                <option value="Ranchoapan">Ranchoapan</option>
+                <option value="Mixtán">Mixtan</option>
+                <option value="San Soles">San Soles</option>
+                <option value="Lomas de Tacamichapan">Lomas de Tacamichapan</option>
+                <option value="Galeras">Galeras</option>
+                <option value="La Lajilla">La Lajilla</option>
+                <option value="Ixpuchapan">Ixpuchapan</option>
+                <option value="Yancuigapan">Yancuigapan</option>
+                <option value="Buena Vista">Buena Vista</option>
+                <option value="Malota">Malota</option>
+            </select>
+            <select id="direccionSelect">
+                <option value="">Dirección de Atención a Población Vulnerable</option>
+                <option value="Alimentación Escolar Modalidad Caliente y Fría">Alimentacion Escolar Modalidad Caliente y Fria</option>
+                <option value="Atención Alimentaria a Grupos Prioritarios">Atencion Alimentaria a Grupos Prioritarios</option>
+                <option value="Atención Alimentaria a Personas en Situación de Emergencia o Desastre">Atencion Alimentaria a Personas en Situacion de Emergencia o Desastre</option>
+                <option value="Atención Alimentaria en los Primeros 1000 Días">Atencion Alimentaria en los Primeros 1000 Dias</option>
+                <option value="Desarrollo a la Vivienda y la Comunidad">Desarrollo a la Vivienda y la Comunidad</option>
+                <option value="Programa de Asistencia a la Población en Condición de Emergencia (APCE)">Programa de Asistencia a la Poblacion en Condicion de Emergencia (APCE)</option>
+                <option value="Programa de Salud y Bienestar Comunitario (PSBC)">Programa de Salud y Bienestar Comunitario (PSBC)</option>
+                <option value="Proyectos Productivos">Proyectos Productivos</option>
+            </select>
+            <button id="filtrarBtn">Filtrar</button>
+            <button id="exportBtn">Exportar Tabla</button>
+
+        </div>
+
+        
+        <div class="table-container">
+            <table id="outputTable">
+                <thead>
+                    <tr>
+                        <th>#</th> <!-- Nueva columna para el índice -->
+                        <th>Seleccionar</th>
+                        <th>Clave</th>
+                        <th>CURP´s Asociadas</th>
+                        <th>Apellido Paterno</th>
+                        <th>Apellido Materno</th>
+                        <th>Nombres</th>
+                        <th>Sexo</th>
+                        <th>Fecha de Nacimiento</th>
+                        <th>Entidad de Registro</th>
+                        <th>Homoclave</th>
+                        <th>Localidad</th>
+                        <th>Dirección de Atención a Población Vulnerable</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Aquí se cargarán los datos dinámicamente -->
+                </tbody>
+            </table>
+            
+        </div>
+        <div id="actionMenu" class="action-menu">
+            <label class="checkbox-label">
+                <input type="checkbox" id="selectAllBtn" onclick="selectAllCurps()">
+                Seleccionar Todos
+            </label>
+            
+            <button id="deleteButton" class="bote-basura">
+                <img class="bote-basura" src="images/basura.png" alt="">
+                Borrar
+            </button>
+            
+
+            <button id="closeActionMenu" class="close-menu-btn"><img class="cerrar" src="images/equis.png" alt=""></button>
+        </div>
+    </div>
+
+    <script src="curps.js"></script>
+    <script>
+
+
+        
+// Función para convertir la tabla a formato CSV y manejar caracteres especiales
+function exportTableToCSV() {
+    const rows = tableBody.getElementsByTagName('tr');
+    // Encabezados con las columnas completas, incluidas CURP's Asociadas y Dirección de Atención
+    let csvContent = "Clave, CURP's Asociadas, Apellido Paterno, Apellido Materno, Nombres, Sexo, Fecha Nacimiento, Entidad, Homoclave, Localidad, Dirección de Atención a Población Vulnerable\n";
+
+    // Recorrer todas las filas y obtener los datos de cada celda
+    for (let row of rows) {
+        const cells = row.getElementsByTagName('td');
+        let rowData = [];
+        
+        // Recoger los valores de cada celda (excepto la checkbox)
+        for (let i = 2; i <= 12; i++) {
+            // Agregar comillas dobles alrededor de cada dato para evitar problemas de separación
+            rowData.push(`"${cells[i].textContent.trim()}"`);
+        }
+
+        // Unir los valores con comas y agregarlos a la cadena CSV
+        csvContent += rowData.join(',') + "\n";
+    }
+
+    // Crear un archivo CSV con codificación UTF-8
+    const blob = new Blob([`\uFEFF${csvContent}`], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'curps.csv';  // Nombre del archivo
+    link.click();
+    URL.revokeObjectURL(url);  // Liberar el objeto URL
+}
+
+
+// Agregar el evento al botón de exportar
+const exportBtn = document.getElementById('exportBtn');
+exportBtn.addEventListener('click', exportTableToCSV);
+
+    </script>
+</body>
+</html>

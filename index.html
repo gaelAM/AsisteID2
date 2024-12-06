@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AsisteID</title>
+    <link rel="icon" href="images/icono.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div id="main-content">
+        <div id="header">
+            <button id="menuBtn">&#9776;</button>
+            <div id="titulo">
+                <h1>AsisteID</h1>
+                <h5>Jáltipan de Morelos, Veracruz.</h5>
+            </div>
+        </div>
+
+        <div id="sidebar">
+            <button id="closeBtn">&times;</button>
+            <a href="index.html">Inicio</a>
+            <a href="escanear.html">Escanear CURPs</a>
+            <a href="curps.html">Consulta de CURPs</a>
+            <a href="localidades.html">Localidades cercanas</a>
+            <a href="cronograma.html">Calendario de Entregas</a>
+        </div>
+
+        <div id="infoApp">
+            <h2>Información de la Aplicación</h2>
+            <hr>
+            <section id="information" class="info-section">
+                <div id="información">
+                    <p>Descubre todas las funciones y ventajas de AsisteID, la aplicación diseñada para facilitar la
+                        gestión de tus registros y obtener información sobre tus comunidades cercanas. Escanea tu CURP
+                        de manera rápida y sencilla utilizando códigos QR.</p>
+                </div>
+            </section>
+            <hr>
+        </div>
+
+        <!-- Galería de imágenes desplazable -->
+        <div class="gallery-container">
+            <div class="gallery">
+                <img src="images/comunidad1.jpg" alt="Comunidad 1">
+                <img src="images/escuela1.jpg" alt="Escuela 1">
+                <img src="images/comunidad2.jpg" alt="Comunidad 2">
+                <img src="images/escuela3.jpg" alt="Escuela 2">
+                <img src="images/comunidad3.jpg" alt="Comunidad 3">
+                <img src="images/escuela2.jpg" alt="Escuela 3">
+                <img src="images/comunidad4.jpg" alt="Comunidad 4">
+            </div>
+        </div>
+        <br>
+
+        <footer>
+            <p>&copy; 2024 AsisteID - Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const closeBtn = document.getElementById('closeBtn');
+        const sidebar = document.getElementById('sidebar');
+
+        menuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,318 @@
+/* General */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* Estilos de fondo */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    background-color: #E6007E;
+    /* Rosa mexicano */
+    color: #000000;
+    margin: 0;
+    height: 100%;
+}
+
+h1,
+h2,
+p {
+    color: #000000;
+}
+
+/* Estilos para el menú lateral */
+#sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    background-color: #fff;
+    color: #E6007E;
+    /* Rosa mexicano para los textos */
+    padding-top: 20px;
+    transition: 0.3s;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    /* Asegura que el menú esté sobre el contenido */
+}
+
+#sidebar a {
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #E6007E;
+    display: block;
+    transition: 0.3s;
+}
+
+#sidebar a:hover {
+    background-color: #FFC0CB;
+    /* Rosa claro */
+}
+
+#main-content {
+    padding: 30px;
+    transition: margin-left 0.3s;
+    margin-left: 0;
+    background-color: #fff;
+    /* Fondo blanco para el contenido principal */
+    border-radius: 10px;
+    box-shadow: 0 0 px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    /* Asegura que el contenido esté detrás del menú */
+}
+
+/* Botón de menú redondo */
+#menuBtn,
+#closeBtn {
+    font-size: 30px;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #ffffff00;
+    /* Fondo blanco */
+    color: #E6007E;
+    /* Texto en rosa mexicano */
+    border: none;
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+}
+
+#menuBtn {
+    left: 20px;
+}
+
+#closeBtn {
+    right: 20px;
+}
+
+#sidebar.open {
+    left: 0;
+}
+
+#main-content.open {
+    margin-left: 20px;
+}
+
+/* Galería de imágenes desplazable */
+.gallery-container {
+    width: 100%;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.gallery {
+    display: flex;
+    width: 700%;
+    animation: slide 250s infinite;
+}
+
+.gallery img {
+    width: 14.28%;
+    height: auto;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(0);
+    }
+
+    14.28% {
+        transform: translateX(-100%);
+    }
+
+    28.56% {
+        transform: translateX(-200%);
+    }
+
+    42.84% {
+        transform: translateX(-300%);
+    }
+
+    57.12% {
+        transform: translateX(-400%);
+    }
+
+    71.4% {
+        transform: translateX(-500%);
+    }
+
+    85.68% {
+        transform: translateX(-600%);
+    }
+}
+
+
+#titulo {
+    display: flex;
+    justify-content: center;
+    /* Centra horizontalmente */
+    align-items: center;
+    /* Centra verticalmente */
+    height: 150px;
+    /* Ajusta según el espacio necesario */
+    text-align: center;
+    margin: 0 auto;
+    max-width: 100%;
+    /* Asegura que ocupe el espacio necesario */
+}
+
+#titulo h1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #333;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+#titulo:hover {
+    /* Eliminar el efecto de sombra o transformación */
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    /* Sin sombra */
+}
+
+/* Contenedor de las cartas */
+.card-container {
+    display: flex;
+    justify-content: center;
+    /* Centra las cartas horizontalmente */
+    align-items: center;
+    /* Centra las cartas verticalmente */
+    flex-wrap: wrap;
+    /* Permite que las cartas se ajusten al tamaño de la pantalla */
+    gap: 20px;
+    /* Espacio entre las cartas */
+    padding: 5px;
+    margin-top: 0px;
+    /* Da un poco de margen superior */
+}
+
+/* Estilo de las cartas */
+.card {
+    width: 260px;
+    /* Ajusta el tamaño de las cartas */
+    height: 350px;
+    /* Ajusta el alto de las cartas */
+    perspective: 1000px;
+    margin: 10px;
+    /* Añade un pequeño margen entre las cartas */
+}
+
+/* Tarjeta interna */
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Cara frontal de la carta */
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Cara frontal */
+.card-front {
+    background-color: #E6007E;
+    /* Morado DIF */
+    color: white;
+}
+
+.card-front img {
+    width: 100%;
+    height: 75%;
+    object-fit: cover;
+}
+
+/* Cara posterior */
+.card-back {
+    background-color: #E6007E;
+    /* Morado oscuro */
+    color: white;
+    transform: rotateY(180deg);
+    padding: 1rem;
+    text-align: center;
+}
+
+.card-back ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.card-back h3 {
+    margin-bottom: 5%;
+    margin-top: 15%;
+}
+
+.card-back li {
+    margin-bottom: 15%;
+    margin-top: 15%;
+}
+
+.card-back a {
+    color: #ddd;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.card-back a:hover {
+    text-decoration: underline;
+}
+
+/* Media query para pantallas más pequeñas */
+@media (max-width: 600px) {
+    body{
+        margin-top: 5px;
+    }
+
+    #menuBtn{
+        background: none;
+    }
+
+    .container {
+        padding: 10px;
+        /* Menos espacio entre las cartas en pantallas pequeñas */
+        gap: 10px;
+        /* Menos espacio entre las cartas */
+    }
+
+    /* Ajuste del tamaño de las cartas */
+    .card {
+        width: 200px;
+        /* Reducir tamaño de las cartas en pantallas pequeñas */
+        height: 300px;
+        /* Reducir alto de las cartas */
+    }
+}

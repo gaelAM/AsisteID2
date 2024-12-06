@@ -1,0 +1,240 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    background-color: #E6007E;
+    color: #000000;
+    margin: 0;
+    height: 100%;
+}
+
+/* Menú lateral */
+#sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    background-color: #fff;
+    color: #E6007E;
+    padding-top: 20px;
+    transition: 0.3s;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+#sidebar a {
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #E6007E;
+    display: block;
+    transition: 0.3s;
+}
+
+#sidebar a:hover {
+    background-color: #FFC0CB;
+}
+
+#main-content {
+    padding: 30px;
+    transition: margin-left 0.3s;
+    margin-left: 0;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    margin-bottom: 100px;
+}
+
+#menuBtn,
+#closeBtn {
+    font-size: 30px;
+    cursor: pointer;
+    padding: 10px;
+    background:none;
+    color: #E6007E;
+    border: none;
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+}
+
+#menuBtn {
+    left: 20px;
+}
+
+#closeBtn {
+    right: 20px;
+}
+
+#sidebar.open {
+    left: 0;
+}
+
+#main-content.open {
+    margin-left: 250px;
+}
+
+.calendar-container {
+    width: 100%;
+    max-width: 1900px;
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.calendar-header {
+    text-align: center;
+    background: #ff60b7;
+    color: #ffffff;
+    padding: 20px 0;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.calendar-header select {
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 2px solid #ffffff;
+    background-color: #ffffff;
+    color: #000000;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.calendar-header select:hover {
+    background-color: #ffd1ea;
+}
+
+.calendar-header select option {
+    background: #ffffff;
+    color: #000000;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background: #d9d9d9;
+}
+
+.calendar-grid div {
+    background: #ffffff;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.calendar-grid .header {
+    font-weight: bold;
+    background:  #ffadda;
+    color: #ffffff;
+}
+
+.note-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+}
+
+.note-modal.active {
+    display: block;
+}
+
+.note-modal h3 {
+    margin: 0 0 20px;
+}
+
+.note-modal textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.note-modal button {
+    background: #E6007E; /* Rosa mexicano */
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.message {
+    text-align: center;
+    margin-top: 10px;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+.has-note {
+    background-color: #ffb2f1 !important;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+
+.has-note:hover {
+    background-color: #ff9ded !important;
+}
+
+/* Ajustes responsivos para el calendario */
+@media (max-width: 600px) {
+    .calendar-grid {
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+    }
+
+    .calendar-grid div {
+        padding: 10px; /* Reduce el tamaño del padding */
+        font-size: 12px; /* Ajusta el tamaño de la fuente */
+    }
+
+    .calendar-header {
+        display: flex;
+        justify-content: center; /* Centra los elementos horizontalmente */
+        align-items: center; /* Alinea los elementos verticalmente */
+        gap: 15px; /* Espaciado entre los elementos */
+        background: #ff60b7;
+        color: #ffffff;
+        padding: 20px 0;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    
+    .calendar-header select {
+        padding: 8px 12px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 2px solid #ffffff;
+        background-color: #ffffff;
+        color: #000000;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    
+}
